@@ -142,3 +142,27 @@ Remove images:
 ```sh
 $ docker rmi $(docker images -q)
 ```
+``
+
+---
+### Docker optimization
+`Reduced size from 3,434 mb to 502 mb`
+```
+gyzheng@greg sandbox  $ docker images | grep microservicemovies | head -20
+microservicemovies_web-service        latest              0441bfb32037        2 minutes ago       268MB
+microservicemovies_swagger            latest              5c531d1e1d7d        6 minutes ago       88.6MB
+microservicemovies_movies-service     latest              8143de7e555d        7 minutes ago       117MB
+microservicemovies_movies-db          latest              c031234078e8        8 minutes ago       38.2MB
+microservicemovies_users-service      latest              929be921d7a7        8 minutes ago       121MB
+microservicemovies_users-db           latest              26e9484cdadd        15 minutes ago      38.2MB
+microservicemoviesv2_web-service      latest              389a427fa5fa        26 hours ago        877MB
+microservicemoviesv2_swagger          latest              12ed39a7c714        27 hours ago        697MB
+microservicemoviesv2_movies-service   latest              3f902847f99e        27 hours ago        726MB
+microservicemoviesv2_movies-db        latest              bea610ce28ef        27 hours ago        287MB
+microservicemoviesv2_users-service    latest              aa4f83d353d5        27 hours ago        730MB
+microservicemoviesv2_users-db         latest              68d0054e10b3        27 hours ago        287MB
+```
+`Clean up previous images`
+```
+docker rmi $(docker images | grep microservicemoviesv | awk '{print $3}')
+```
